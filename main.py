@@ -9,9 +9,12 @@ import googleapiclient.discovery
 import json
 
 SCOPES = ["https://www.googleapis.com/auth/contacts"]
-SERVICE_ACCOUNT_FILE = "credentials.json"
+SERVICE_ACCOUNT_FILE = "old-credentials.json"
 
-credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+# https://stackoverflow.com/questions/65897777/google-contacts-are-not-showing-by-using-google-people-api
+credentials = service_account.Credentials.from_service_account_file(
+    SERVICE_ACCOUNT_FILE, scopes=SCOPES, subject="your@mail.com"
+)
 people_service = googleapiclient.discovery.build("people", "v1", credentials=credentials)
 
 givenName = "Jhon"
